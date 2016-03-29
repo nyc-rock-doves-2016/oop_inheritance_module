@@ -1,5 +1,5 @@
 class Person
-  attr_reader :name
+  attr_accessor :name
   def initialize(name)
     @name = name
   end
@@ -10,50 +10,34 @@ class Employee < Person
 end
 
 module Code
-  def make_bag
-    "#{@name} does some bugs"
+  def make_bugs
+    "#{name} does some bugs"
   end
 end
 
 class Developer < Employee
-  include Code
-end
+  attr_accessor :programming_ln
 
-module Test
-  def fix_bug
-    "#{@name} does some test"
+  include Code
+
+  def incease_salary
+    self.salary += 5000
   end
 
 end
 
+module Test
+  def fix_bugs
+    "#{name} can fix bugs"
+  end
+end
 
 class Tester < Employee
   include Test
 end
 
+
 class Intern < Person
   include Code
   include Test
 end
-
-
-developer = Developer.new("Anton")
-# p developer
-developer.salary = 65000
-p developer
- p developer.make_bag
-
-
-tester = Tester.new("Oleg")
-tester.salary = 50000
-p tester.fix_bug
-
-
-intern = Intern.new('Olesa')
-p intern.make_bag
-p intern.fix_bug
-
-
-
-# employee = Employee.new('Julia')
-# employee.make_bag
